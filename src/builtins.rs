@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::sync::OnceLock;
 
 use crate::commands::{
-    command::Command, echo::EchoCommand, exit::ExitCommand, pwd::PwdCommand,
+    cd::CdCommand, command::Command, echo::EchoCommand, exit::ExitCommand, pwd::PwdCommand,
     type_command::TypeCommand,
 };
 
@@ -21,6 +21,7 @@ pub fn get_builtins() -> &'static HashMap<String, BoxCommand> {
             build_command("echo", EchoCommand::new()),
             build_command("type", TypeCommand::new()),
             build_command("pwd", PwdCommand::new()),
+            build_command("cd", CdCommand::new()),
         ])
     })
 }

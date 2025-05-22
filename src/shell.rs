@@ -1,5 +1,5 @@
 use core::str;
-use std::{arch::x86_64::_SIDD_CMP_RANGES, collections::HashMap, process::Command as Exec};
+use std::{collections::HashMap, process::Command as Exec};
 
 use crate::{
     builtins::get_builtins,
