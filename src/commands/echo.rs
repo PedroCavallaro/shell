@@ -9,8 +9,10 @@ impl EchoCommand {
     }
 }
 
+impl EchoCommand {}
+
 impl Command for EchoCommand {
-    fn parse(&self, args: Vec<&str>) -> Result<String, String> {
+    fn parse(&self, args: Vec<String>) -> Result<String, String> {
         let output = args.join(" ");
 
         Ok(format!("{}\n", output))

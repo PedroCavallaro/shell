@@ -21,7 +21,7 @@ impl Shell {
     fn is_exec_program(command: &str) -> bool {
         let type_command = TypeCommand::new();
 
-        let path = type_command.parse([command].to_vec());
+        let path = type_command.parse([command.to_string()].to_vec());
 
         if let Ok(_path) = path {
             return true;
@@ -30,7 +30,7 @@ impl Shell {
         false
     }
 
-    fn exec_program(command: &String, args: &[&str]) -> bool {
+    fn exec_program(command: &String, args: &[String]) -> bool {
         let is_exec = Self::is_exec_program(command);
 
         if !is_exec {
@@ -46,7 +46,7 @@ impl Shell {
         true
     }
 
-    pub fn parse(&self, args: Vec<&str>, command: String) -> Result<String, String> {
+    pub fn parse(&self, args: Vec<String>, command: String) -> Result<String, String> {
         let builtin_command = self.commands.get(&command);
 
         if builtin_command.is_none() {

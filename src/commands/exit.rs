@@ -10,7 +10,7 @@ impl ExitCommand {
 }
 
 impl Command for ExitCommand {
-    fn parse(&self, _: Vec<&str>) -> Result<String, String> {
+    fn parse(&self, _: Vec<String>) -> Result<String, String> {
         std::process::exit(0);
     }
 }

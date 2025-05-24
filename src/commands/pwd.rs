@@ -12,7 +12,7 @@ impl PwdCommand {
 }
 
 impl Command for PwdCommand {
-    fn parse(&self, _: Vec<&str>) -> Result<String, String> {
+    fn parse(&self, _: Vec<String>) -> Result<String, String> {
         let path = env::current_dir();
 
         if let Ok(_path) = path {

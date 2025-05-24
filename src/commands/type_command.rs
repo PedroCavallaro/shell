@@ -24,9 +24,9 @@ impl TypeCommand {
         }
     }
 
-    fn find_path(paths: OsString, command: &str) -> Option<String> {
+    fn find_path(paths: OsString, command: String) -> Option<String> {
         for path in env::split_paths(&paths) {
-            let full_path = PathBuf::from(&path).join(command);
+            let full_path = PathBuf::from(&path).join(command.clone());
 
             if full_path.exists() && Self::is_executable(&full_path) {
                 return Some(format!("{} is {}\n", command, full_path.to_string_lossy()));
@@ -38,7 +38,7 @@ impl TypeCommand {
 }
 
 impl Command for TypeCommand {
-    fn parse(&self, args: Vec<&str>) -> Result<String, String> {
+    fn parse(&self, args: Vec<String>) -> Result<String, String> {
         let builtins = get_builtins();
 
         let paths = env::var_os("PATH");
@@ -47,11 +47,11 @@ impl Command for TypeCommand {
             return Err(format!("{}: not found\n", args[0]));
         }
 
-        let command = args[0];
+        let command = args[0].clone();
 
-        let command_path = Self::find_path(paths.unwrap(), command);
+        let command_path = Self::find_path(paths.unwrap(), command.clone());
 
-        if let Some(_built_in) = builtins.get(command) {
+        if let Some(_built_in) = builtins.get(&command) {
             return Ok(format!("{} is a shell builtin\n", command));
         }
 

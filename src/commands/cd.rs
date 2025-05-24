@@ -10,7 +10,7 @@ impl CdCommand {
         Self {}
     }
 
-    pub fn get_path(path: &str) -> String {
+    pub fn get_path(path: String) -> String {
         if !path.contains('~') {
             return path.to_string();
         }
@@ -26,12 +26,12 @@ impl CdCommand {
 }
 
 impl Command for CdCommand {
-    fn parse(&self, args: Vec<&str>) -> Result<String, String> {
+    fn parse(&self, args: Vec<String>) -> Result<String, String> {
         if args.is_empty() {
             return Ok("".to_string());
         }
 
-        let path = args[0];
+        let path = args[0].clone();
 
         let dir_path = CdCommand::get_path(path);
 
